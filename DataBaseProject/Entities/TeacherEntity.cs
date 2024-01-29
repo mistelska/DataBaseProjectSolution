@@ -14,5 +14,5 @@ public class TeacherEntity
     public string LastName { get; set; } = null!;
 
     public int SubjectId { get; set; }
-    public SubjectEntity Subject { get; set; }
+    public SubjectEntity Subject { get; set; } = null!;
 }

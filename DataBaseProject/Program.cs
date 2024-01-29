@@ -1,4 +1,5 @@
-﻿using DataBaseProject.Contexts;
+﻿using DataBaseProject;
+using DataBaseProject.Contexts;
 using DataBaseProject.Repositories;
 using DataBaseProject.Services;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,11 @@ var builder = Host.CreateDefaultBuilder().ConfigureServices(services =>
     services.AddScoped<SubjectService>();
     services.AddScoped<TeacherService>();
 
+    services.AddSingleton<StudyManagementProgram>();
+
 }).Build();
 
-
+var StudyManagementProgram = builder.Services.GetRequiredService<StudyManagementProgram>();
+//StudyManagementProgram.AddNewStudent();
+//StudyManagementProgram.ShowAllStudents();
+StudyManagementProgram.UpdateStudent();

@@ -18,7 +18,7 @@ public class StudentEntity
     [StringLength(50)]
     public string? PhoneNumber { get; set; }
     public int CourseId { get; set; }
-    public CourseEntity Course { get; set; }
+    public CourseEntity Course { get; set; } = null!;
     public int GradeId { get; set; }
-    public GradeEntity Grade { get; set; }
+    public GradeEntity Grade { get; set; } = null!;
 }

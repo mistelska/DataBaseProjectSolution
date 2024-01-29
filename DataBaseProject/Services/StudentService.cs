@@ -34,9 +34,9 @@ internal class StudentService
         return studentEntity;
     }
 
-    public StudentEntity GetStudentByEmail(string email)
+    public StudentEntity GetStudentByEmail(int id)
     {
-        var studentEntity = _studentRepository.Get(x => x.Email == email);
+        var studentEntity = _studentRepository.Get(x => x.Id == id);
         return studentEntity;
     }
 
