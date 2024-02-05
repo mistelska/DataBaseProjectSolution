@@ -21,10 +21,10 @@ internal class CourseService
         }
         return courseEntity;
     }
-    
-    public CourseEntity GetCourseByName(string courseName)
+
+    public CourseEntity GetCourseById(int id)
     {
-        var courseEntity = _courseRepository.Get(x => x.CourseName == courseName);
+        var courseEntity = _courseRepository.Get(x => x.Id == id);
         return courseEntity;
     }
 

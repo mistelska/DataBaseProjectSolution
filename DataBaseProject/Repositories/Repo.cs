@@ -1,5 +1,4 @@
 ﻿using DataBaseProject.Contexts;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using System.Linq.Expressions;
 
 namespace DataBaseProject.Repositories;

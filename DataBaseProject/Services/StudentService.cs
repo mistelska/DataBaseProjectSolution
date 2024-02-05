@@ -34,7 +34,7 @@ internal class StudentService
         return studentEntity;
     }
 
-    public StudentEntity GetStudentByEmail(int id)
+    public StudentEntity GetStudentById(int id)
     {
         var studentEntity = _studentRepository.Get(x => x.Id == id);
         return studentEntity;
@@ -52,8 +52,8 @@ internal class StudentService
         return updatedStudent;
     }
 
-    public void DeleteStudent(string email)
+    public void DeleteStudent(int id)
     {
-        _studentRepository.Delete(x => x.Email == email);
+        _studentRepository.Delete(x => x.Id == id);
     }
 }

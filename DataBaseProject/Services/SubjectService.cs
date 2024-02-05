@@ -21,9 +21,9 @@ internal class SubjectService
         return subjectEntity;
     }
 
-    public SubjectEntity GetSubjectByName(string subjectName)
+    public SubjectEntity GetSubjectById(int id)
     {
-        var subjectEntity = _subjectRepository.Get(x => x.SubjectName == subjectName);
+        var subjectEntity = _subjectRepository.Get(x => x.Id == id);
         return subjectEntity;
     }
 

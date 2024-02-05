@@ -32,9 +32,9 @@ namespace DataBaseProject.Services
             return teacherEntity;
         }
 
-        public TeacherEntity GetTeacherByName(string lastName)
+        public TeacherEntity GetTeacherById(int id)
         {
-            var teacherEntity = _teacherRepository.Get(x => x.LastName == lastName);
+            var teacherEntity = _teacherRepository.Get(x => x.Id == id);
             return teacherEntity;
         }
 

@@ -1,5 +1,5 @@
-﻿using DataBaseProject;
-using DataBaseProject.Contexts;
+﻿using DataBaseProject.Contexts;
+using DataBaseProject.MainMenu;
 using DataBaseProject.Repositories;
 using DataBaseProject.Services;
 using Microsoft.EntityFrameworkCore;
@@ -22,11 +22,24 @@ var builder = Host.CreateDefaultBuilder().ConfigureServices(services =>
     services.AddScoped<SubjectService>();
     services.AddScoped<TeacherService>();
 
-    services.AddSingleton<StudyManagementProgram>();
+    services.AddSingleton<MainMenuStudent>();
+    services.AddSingleton<MainMenuCourse>();
+    services.AddSingleton<MainMenuGrade>();
+    services.AddSingleton<MainMenuSubject>();
+    services.AddSingleton<MainMenuTeacher>();
+    services.AddSingleton<StudyManagementMenu>();
+
+    services.AddSingleton<StudyManagementMenu>();
 
 }).Build();
 
-var StudyManagementProgram = builder.Services.GetRequiredService<StudyManagementProgram>();
-//StudyManagementProgram.AddNewStudent();
-//StudyManagementProgram.ShowAllStudents();
-StudyManagementProgram.UpdateStudent();
+using (var scope = builder.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+
+    var studyManagementMenu = serviceProvider.GetRequiredService<StudyManagementMenu>();
+
+    studyManagementMenu.MainMenu();
+}
+
+
