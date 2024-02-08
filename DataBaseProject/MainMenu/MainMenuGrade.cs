@@ -12,82 +12,127 @@ internal class MainMenuGrade
 
     public void AddNewGrade()
     {
-        Console.Clear();
-        Console.WriteLine("--Add New Grade--");
-
-        Console.Write("Grade: ");
-        var grade = Console.ReadLine()!;
-
-        var newGrade = _gradeService.CreateGrade(grade);
-        if (newGrade != null)
+        try
         {
             Console.Clear();
-            Console.WriteLine("The Grade is now added to the list.");
-            Console.ReadLine();
+            Console.WriteLine("--Add New Grade--");
+
+            Console.Write("Grade: ");
+            var grade = Console.ReadLine()!;
+
+            var newGrade = _gradeService.CreateGrade(grade);
+            if (newGrade != null)
+            {
+                Console.Clear();
+                Console.WriteLine("The Grade is now added to the list.");
+                Console.ReadLine();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
         }
     }
     public void ShowAllGrades()
     {
-        Console.Clear();
-        Console.WriteLine("All Grades in our System");
-
-        var grades = _gradeService.GetAllGrades();
-        foreach (var grade in grades)
+        try
         {
-            Console.WriteLine($"\n{grade.Grade}");
+            Console.Clear();
+            Console.WriteLine("All Grades in our System");
+
+            var grades = _gradeService.GetAllGrades();
+            foreach (var grade in grades)
+            {
+                Console.WriteLine($"\n{grade.Grade}");
+            }
+            Console.ReadLine();
         }
-        Console.ReadLine();
+        catch(Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+        }
     }
     public void ShowOneGradeById()
     {
-        Console.Clear();
-        Console.WriteLine("Show One Grade");
-        Console.Write("Type in the Grade ID-number: ");
-        var id = int.Parse(Console.ReadLine()!);
-
-        var grade = _gradeService.GetGradeById(id);
-        if (grade != null)
+        try
         {
-            Console.WriteLine($"Grade with the ID: {id}");
-            Console.WriteLine($"\n{grade.Grade}");
+            Console.Clear();
+            Console.WriteLine("Show One Grade");
+            Console.Write("Type in the Grade ID-number: ");
+            var id = int.Parse(Console.ReadLine()!);
+
+            var grade = _gradeService.GetGradeById(id);
+            if (grade != null)
+            {
+                Console.WriteLine($"Grade with the ID: {id}");
+                Console.WriteLine($"\n{grade.Grade}");
+                Console.ReadKey();
+            }
+        }
+        catch( Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
             Console.ReadKey();
         }
     }
 
     public void UpdateGrade()
     {
-        Console.Clear();
-        Console.WriteLine("Update Grade");
-        Console.Write("Type Grade Id here: ");
-        var id = int.Parse(Console.ReadLine()!);
-
-        var grade = _gradeService.GetGradeById(id);
-        if (grade != null)
+        try
         {
-            Console.WriteLine($"{grade.Grade}");
-
-            Console.Write("New Grade: ");
-            grade.Grade = Console.ReadLine()!;
-
-            var updatedGrade = _gradeService.UpdateGrade(grade);
             Console.Clear();
-            Console.WriteLine("Grade updated!");
+            Console.WriteLine("Update Grade");
+            Console.Write("Type Grade Id here: ");
+            var id = int.Parse(Console.ReadLine()!);
+
+            var grade = _gradeService.GetGradeById(id);
+            if (grade != null)
+            {
+                Console.WriteLine($"{grade.Grade}");
+
+                Console.Write("New Grade: ");
+                grade.Grade = Console.ReadLine()!;
+
+                var updatedGrade = _gradeService.UpdateGrade(grade);
+                Console.Clear();
+                Console.WriteLine("Grade updated!");
+                Console.ReadKey();
+            }
+        }
+        catch(Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
             Console.ReadKey();
         }
     }
     public void DeleteGradeById()
     {
-        Console.Clear();
-        Console.WriteLine("Delete a Grade");
-        Console.Write("Grade ID-number: ");
-        var id = int.Parse(Console.ReadLine()!);
-
-        var grade = _gradeService.GetGradeById(id);
-        if (grade != null)
+        try
         {
-            Console.WriteLine($"You are now deleting {grade.Grade}.");
-            _gradeService.DeleteGrade(id);
-            Console.WriteLine("Grade Deleted!");
+            Console.Clear();
+            Console.WriteLine("Delete a Grade");
+            Console.Write("Grade ID-number: ");
+            var id = int.Parse(Console.ReadLine()!);
+
+            var grade = _gradeService.GetGradeById(id);
+            if (grade != null)
+            {
+                Console.WriteLine($"You are now deleting {grade.Grade}.");
+                _gradeService.DeleteGrade(id);
+                Console.WriteLine("Grade Deleted!");
+                Console.ReadKey();
+            }
+        }
+        catch( Exception ex )
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
             Console.ReadKey();
         }
     }

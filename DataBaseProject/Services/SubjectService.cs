@@ -13,34 +13,84 @@ internal class SubjectService
 
     public SubjectEntity CreateSubject(string subjectName)
     {
-        var subjectEntity = _subjectRepository.Get(x => x.SubjectName == subjectName);
-        if(subjectEntity == null)
+        try
         {
-            subjectEntity = _subjectRepository.Create(new SubjectEntity { SubjectName = subjectName });
+            var subjectEntity = _subjectRepository.Get(x => x.SubjectName == subjectName);
+            if (subjectEntity == null)
+            {
+                subjectEntity = _subjectRepository.Create(new SubjectEntity { SubjectName = subjectName });
+            }
+            return subjectEntity;
         }
-        return subjectEntity;
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
 
     public SubjectEntity GetSubjectById(int id)
     {
-        var subjectEntity = _subjectRepository.Get(x => x.Id == id);
-        return subjectEntity;
+        try
+        {
+
+            var subjectEntity = _subjectRepository.Get(x => x.Id == id);
+            return subjectEntity;
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
 
     public IEnumerable<SubjectEntity> GetAllSubjects()
     {
-        var subjects = _subjectRepository.GetAllFromList();
-        return subjects;
+        try
+        {
+            var subjects = _subjectRepository.GetAllFromList();
+            return subjects;
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
 
     public SubjectEntity UpdateSubject(SubjectEntity subjectEntity)
     {
-        var updatedSubject = _subjectRepository.Update(x => x.Id == subjectEntity.Id, subjectEntity);
-        return updatedSubject;
+        try
+        {
+            var updatedSubject = _subjectRepository.Update(x => x.Id == subjectEntity.Id, subjectEntity);
+            return updatedSubject;
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
 
     public void DeleteSubject(int id)
     {
-        _subjectRepository.Delete(x => x.Id == id);
+        try
+        {
+            _subjectRepository.Delete(x => x.Id == id);
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+        }
     }
 }

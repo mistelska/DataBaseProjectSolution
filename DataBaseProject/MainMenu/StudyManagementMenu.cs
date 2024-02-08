@@ -21,14 +21,13 @@ internal class StudyManagementMenu
         {
             Console.Clear();
             Console.WriteLine("Welcome to the Study Management Application");
-            Console.WriteLine("[1] Create New..");
+            Console.WriteLine("\n[1] Create New..");
             Console.WriteLine("[2] Show all..");
             Console.WriteLine("[3] Show one..");
             Console.WriteLine("[4] Update..");
             Console.WriteLine("[5] Delete..");
             Console.WriteLine("[6] Quit");
-
-            var option = int.Parse(Console.ReadLine()!);
+            int.TryParse(Console.ReadLine(), out var option);
             switch (option)
             {
                 case 1:
@@ -37,14 +36,13 @@ internal class StudyManagementMenu
                     {
                         Console.Clear();
                         Console.WriteLine("Create a new..");
-                        Console.WriteLine("[1] Student");
+                        Console.WriteLine("\n[1] Student");
                         Console.WriteLine("[2] Course");
                         Console.WriteLine("[3] Grade");
                         Console.WriteLine("[4] Teacher");
                         Console.WriteLine("[5] Subject");
                         Console.WriteLine("[6] Back to Main Menu");
-                        var optionCreate = int.Parse(Console.ReadLine()!);
-
+                        int.TryParse(Console.ReadLine(), out var optionCreate);
                         switch (optionCreate)
                         {
                             case 1:
@@ -66,7 +64,8 @@ internal class StudyManagementMenu
                                 goingCreateMenu = false;
                                 break;
                             default:
-                                Console.WriteLine("Choose between 1-6, please.");
+                                Console.WriteLine("Invalid input! Choose between 1-6, please.");
+                                Console.ReadKey();
                                 break;
                         }
                     }
@@ -77,13 +76,13 @@ internal class StudyManagementMenu
                     {
                         Console.Clear();
                         Console.WriteLine("Show All..");
-                        Console.WriteLine("[1] Students");
+                        Console.WriteLine("\n[1] Students");
                         Console.WriteLine("[2] Courses");
                         Console.WriteLine("[3] Grades");
                         Console.WriteLine("[4] Teachers");
                         Console.WriteLine("[5] Subjects");
                         Console.WriteLine("[6] Back to Main Menu");
-                        var optionShowAll = int.Parse(Console.ReadLine()!);
+                        int.TryParse(Console.ReadLine(), out var optionShowAll);
 
                         switch (optionShowAll)
                         {
@@ -106,7 +105,8 @@ internal class StudyManagementMenu
                                 goingShowAllMenu = false;
                                 break;
                             default:
-                                Console.WriteLine("Choose between 1-6, please.");
+                                Console.WriteLine("Invalid input! Choose between 1-6, please.");
+                                Console.ReadKey();
                                 break;
                         }
                     }
@@ -117,13 +117,13 @@ internal class StudyManagementMenu
                     {
                         Console.Clear();
                         Console.WriteLine("Show one of..");
-                        Console.WriteLine("[1] Students");
+                        Console.WriteLine("\n[1] Students");
                         Console.WriteLine("[2] Courses");
                         Console.WriteLine("[3] Grades");
                         Console.WriteLine("[4] Teachers");
                         Console.WriteLine("[5] Subjects");
                         Console.WriteLine("[6] Back to Main Menu");
-                        var optionShowOne = int.Parse(Console.ReadLine()!);
+                        int.TryParse(Console.ReadLine(), out var optionShowOne);
 
                         switch (optionShowOne)
                         {
@@ -146,7 +146,8 @@ internal class StudyManagementMenu
                                 goingShowOneMenu = false;
                                 break;
                             default:
-                                Console.WriteLine("Choose between 1-6, please.");
+                                Console.WriteLine("Invalid input! Choose between 1-6, please.");
+                                Console.ReadKey();
                                 break;
                         }
                     }
@@ -157,13 +158,13 @@ internal class StudyManagementMenu
                     {
                         Console.Clear();
                         Console.WriteLine("Update..");
-                        Console.WriteLine("[1] Student");
+                        Console.WriteLine("\n[1] Student");
                         Console.WriteLine("[2] Course");
                         Console.WriteLine("[3] Grade");
                         Console.WriteLine("[4] Teacher");
                         Console.WriteLine("[5] Subject");
                         Console.WriteLine("[6] Back to Main Menu");
-                        var optionUpdate = int.Parse(Console.ReadLine()!);
+                        int.TryParse(Console.ReadLine(), out var optionUpdate);
 
                         switch (optionUpdate)
                         {
@@ -186,7 +187,8 @@ internal class StudyManagementMenu
                                 goingUpdateMenu = false;
                                 break;
                             default:
-                                Console.WriteLine("Choose between 1-6, please.");
+                                Console.WriteLine("Invalid input! Choose between 1-6, please.");
+                                Console.ReadKey();
                                 break;
                         }
                     }
@@ -197,13 +199,13 @@ internal class StudyManagementMenu
                     {
                         Console.Clear();
                         Console.WriteLine("Delete..");
-                        Console.WriteLine("[1] Student");
+                        Console.WriteLine("\n[1] Student");
                         Console.WriteLine("[2] Course");
                         Console.WriteLine("[3] Grade");
                         Console.WriteLine("[4] Teacher");
                         Console.WriteLine("[5] Subject");
                         Console.WriteLine("[6] Back to Main Menu");
-                        var optionDelete = int.Parse(Console.ReadLine()!);
+                        int.TryParse(Console.ReadLine(), out var optionDelete);
 
                         switch (optionDelete)
                         {
@@ -226,7 +228,8 @@ internal class StudyManagementMenu
                                 goingDeleteMenu = false;
                                 break;
                             default:
-                                Console.WriteLine("Choose between 1-6, please.");
+                                Console.WriteLine("Invalid input! Choose between 1-6, please.");
+                                Console.ReadKey();
                                 break;
                         }
                     }
@@ -238,7 +241,8 @@ internal class StudyManagementMenu
                     break;
                 default:
                     Console.Clear();
-                    Console.WriteLine("Choose between 1-6, please.");
+                    Console.WriteLine("Invalid input! Choose between 1-6, please.");
+                    Console.ReadKey();
                     break;
             }
         }

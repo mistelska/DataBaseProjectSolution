@@ -18,42 +18,91 @@ internal class StudentService
 
     public StudentEntity CreateStudent(string firstName, string lastName, string email, string phoneNumber, string courseName, string grade)
     {
-        var courseEntity = _courseService.CreateCourse(courseName);
-        var gradeEntity = _gradeService.CreateGrade(grade);
-
-        var studentEntity = new StudentEntity
+        try
         {
-            FirstName = firstName,
-            LastName = lastName,
-            Email = email,
-            PhoneNumber = phoneNumber,
-            CourseId = courseEntity.Id,
-            GradeId = gradeEntity.Id
-        };
-        studentEntity = _studentRepository.Create(studentEntity);
-        return studentEntity;
+            var courseEntity = _courseService.CreateCourse(courseName);
+            var gradeEntity = _gradeService.CreateGrade(grade);
+
+            var studentEntity = new StudentEntity
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                PhoneNumber = phoneNumber,
+                CourseId = courseEntity.Id,
+                GradeId = gradeEntity.Id
+            };
+            studentEntity = _studentRepository.Create(studentEntity);
+            return studentEntity;
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
 
     public StudentEntity GetStudentById(int id)
     {
-        var studentEntity = _studentRepository.Get(x => x.Id == id);
-        return studentEntity;
+        try
+        {
+            var studentEntity = _studentRepository.Get(x => x.Id == id);
+            return studentEntity;
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
 
     public IEnumerable<StudentEntity> GetAllStudents()
     {
-        var students = _studentRepository.GetAllFromList();
-        return students;
+        try
+        {
+            var students = _studentRepository.GetAllFromList();
+            return students;
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
 
     public StudentEntity UpdateStudent (StudentEntity studentEntity)
     {
-        var updatedStudent = _studentRepository.Update(x => x.Id == studentEntity.Id, studentEntity);
-        return updatedStudent;
+        try
+        {
+            var updatedStudent = _studentRepository.Update(x => x.Id == studentEntity.Id, studentEntity);
+            return updatedStudent;
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
 
     public void DeleteStudent(int id)
     {
-        _studentRepository.Delete(x => x.Id == id);
+        try
+        {
+            _studentRepository.Delete(x => x.Id == id);
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+        }
     }
 }

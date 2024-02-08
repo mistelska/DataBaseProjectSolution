@@ -14,31 +14,80 @@ internal class GradeService
 
     public GradeEntity CreateGrade(string grade)
     {
-        var gradeEntity = _gradeRepository.Get(x => x.Grade == grade);
-        if (gradeEntity == null)
+        try
         {
-            gradeEntity = _gradeRepository.Create(new GradeEntity { Grade = grade });
+            var gradeEntity = _gradeRepository.Get(x => x.Grade == grade);
+            if (gradeEntity == null)
+            {
+                gradeEntity = _gradeRepository.Create(new GradeEntity { Grade = grade });
+            }
+            return gradeEntity;
         }
-        return gradeEntity;
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
 
     public GradeEntity GetGradeById (int id)
     {
-        var gradeEntity = _gradeRepository.Get(x => x.Id == id);
-        return gradeEntity;
+        try
+        {
+            var gradeEntity = _gradeRepository.Get(x => x.Id == id);
+            return gradeEntity;
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
     public IEnumerable<GradeEntity> GetAllGrades()
     {
-        var grades = _gradeRepository.GetAllFromList();
-        return grades;
+        try
+        {
+            var grades = _gradeRepository.GetAllFromList();
+            return grades;
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
     public GradeEntity UpdateGrade (GradeEntity gradeEntity)
     {
-        var updatedGrade = _gradeRepository.Update(x => x.Id == gradeEntity.Id, gradeEntity);
-        return updatedGrade;
+        try
+        {
+            var updatedGrade = _gradeRepository.Update(x => x.Id == gradeEntity.Id, gradeEntity);
+            return updatedGrade;
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
     public void DeleteGrade(int id)
     {
-        _gradeRepository.Delete(x => x.Id == id);
+        try
+        {
+            _gradeRepository.Delete(x => x.Id == id);
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+        }
     }
 }

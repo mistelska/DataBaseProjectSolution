@@ -11,37 +11,85 @@ internal class CourseService
     {
         _courseRepository = courseRepository;
     }
-
     public CourseEntity CreateCourse(string courseName)
     {
-        var courseEntity = _courseRepository.Get(x => x.CourseName == courseName);
-        if (courseEntity == null)
+        try
         {
-            courseEntity = _courseRepository.Create(new CourseEntity { CourseName = courseName});
+            var courseEntity = _courseRepository.Get(x => x.CourseName == courseName);
+            if (courseEntity == null)
+            {
+                courseEntity = _courseRepository.Create(new CourseEntity { CourseName = courseName });
+            }
+            return courseEntity;
         }
-        return courseEntity;
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
 
     public CourseEntity GetCourseById(int id)
     {
-        var courseEntity = _courseRepository.Get(x => x.Id == id);
-        return courseEntity;
+        try
+        {
+            var courseEntity = _courseRepository.Get(x => x.Id == id);
+            return courseEntity;
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
 
     public IEnumerable<CourseEntity> GetAllCourses()
     {
-        var courses = _courseRepository.GetAllFromList();
-        return courses;
+        try
+        {
+            var courses = _courseRepository.GetAllFromList();
+            return courses;
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
 
     public CourseEntity UpdateCourse(CourseEntity courseEntity)
     {
-        var updatedCours = _courseRepository.Update(x => x.Id == courseEntity.Id, courseEntity);
-        return updatedCours;
+        try
+        {
+            var updatedCours = _courseRepository.Update(x => x.Id == courseEntity.Id, courseEntity);
+            return updatedCours;
+        }
+        catch (Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+            return null!;
+        }
     }
 
     public void DeleteCourse(int id)
     {
-        _courseRepository.Delete(x => x.Id == id);
+        try
+        {
+            _courseRepository.Delete(x => x.Id == id);
+        }
+        catch(Exception ex)
+        {
+            Console.Clear();
+            Console.WriteLine($"Something went wrong: {ex.Message}");
+            Console.ReadKey();
+        }
     }
 }
