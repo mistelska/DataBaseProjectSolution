@@ -8,8 +8,7 @@ internal class MainMenuSubject
     {
         _subjectService = subjectService;
     }
-
-    public void AddNewSubject()
+    public async Task AddNewSubject()
     {
         try
         {
@@ -19,7 +18,7 @@ internal class MainMenuSubject
             Console.Write("Subject: ");
             var subject = Console.ReadLine()!;
 
-            var newSubject = _subjectService.CreateSubject(subject);
+            var newSubject = await _subjectService.CreateSubject(subject);
             if (newSubject != null)
             {
                 Console.Clear();
@@ -34,14 +33,14 @@ internal class MainMenuSubject
             Console.ReadKey();
         }
     }
-    public void ShowAllSubjects()
+    public async Task ShowAllSubjects()
     {
         try
         {
             Console.Clear();
             Console.WriteLine("All Subjects in our System");
 
-            var subjects = _subjectService.GetAllSubjects();
+            var subjects = await _subjectService.GetAllSubjects();
             foreach (var subject in subjects)
             {
                 Console.WriteLine($"\n{subject.SubjectName}");
@@ -55,7 +54,7 @@ internal class MainMenuSubject
             Console.ReadKey();
         }
     }
-    public void ShowOneSubjectById()
+    public async Task ShowOneSubjectById()
     {
         try
         {
@@ -64,7 +63,7 @@ internal class MainMenuSubject
             Console.Write("Type in the Subject ID-number: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var subject = _subjectService.GetSubjectById(id);
+            var subject = await _subjectService.GetSubjectById(id);
             if (subject != null)
             {
                 Console.WriteLine($"Subject with the ID: {id}");
@@ -80,7 +79,7 @@ internal class MainMenuSubject
         }
     }
 
-    public void UpdateSubject()
+    public async Task UpdateSubject()
     {
         try
         {
@@ -89,7 +88,7 @@ internal class MainMenuSubject
             Console.Write("Type Subject Id here: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var subject = _subjectService.GetSubjectById(id);
+            var subject = await _subjectService.GetSubjectById(id);
             if (subject != null)
             {
                 Console.WriteLine($"{subject.SubjectName}");
@@ -97,7 +96,7 @@ internal class MainMenuSubject
                 Console.Write("New Subject: ");
                 subject.SubjectName = Console.ReadLine()!;
 
-                var updatedSubject = _subjectService.UpdateSubject(subject);
+                var updatedSubject = await _subjectService.UpdateSubject(subject);
                 Console.Clear();
                 Console.WriteLine("Subject updated!");
                 Console.ReadKey();
@@ -110,7 +109,7 @@ internal class MainMenuSubject
             Console.ReadKey();
         }
     }
-    public void DeleteSubjectById()
+    public async Task DeleteSubjectById()
     {
         try
         {
@@ -119,11 +118,11 @@ internal class MainMenuSubject
             Console.Write("Subject ID-number: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var subject = _subjectService.GetSubjectById(id);
+            var subject = await _subjectService.GetSubjectById(id);
             if (subject != null)
             {
                 Console.WriteLine($"You are now deleting {subject.SubjectName}.");
-                _subjectService.DeleteSubject(id);
+                await _subjectService.DeleteSubject(id);
                 Console.WriteLine("Subject Deleted!");
                 Console.ReadKey();
             }

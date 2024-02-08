@@ -14,7 +14,7 @@ internal class StudyManagementMenu
         _mainMenuSubject = mainMenuSubject;
         _mainMenuTeacher = mainMenuTeacher;
     }
-    public void MainMenu()
+    public async Task MainMenu()
     {
         bool goingMainMenu = true;
         while(goingMainMenu)
@@ -46,19 +46,19 @@ internal class StudyManagementMenu
                         switch (optionCreate)
                         {
                             case 1:
-                                _mainMenuStudent.AddNewStudent();
+                                await _mainMenuStudent.AddNewStudent();
                                 break;
                             case 2:
-                                _mainMenuCourse.AddNewCourse();
+                                await _mainMenuCourse.AddNewCourse();
                                 break;
                             case 3:
-                                _mainMenuGrade.AddNewGrade();
+                                await _mainMenuGrade.AddNewGrade();
                                 break;
                             case 4:
-                                _mainMenuTeacher.AddNewTeacher();
+                                await _mainMenuTeacher.AddNewTeacher();
                                 break;
                             case 5:
-                                _mainMenuSubject.AddNewSubject();
+                                await _mainMenuSubject.AddNewSubject();
                                 break;
                             case 6:
                                 goingCreateMenu = false;
@@ -87,19 +87,19 @@ internal class StudyManagementMenu
                         switch (optionShowAll)
                         {
                             case 1:
-                                _mainMenuStudent.ShowAllStudents();
+                                await _mainMenuStudent.ShowAllStudents();
                                 break;
                             case 2:
-                                _mainMenuCourse.ShowAllCourses();
+                                await _mainMenuCourse.ShowAllCourses();
                                 break;
                             case 3:
-                                _mainMenuGrade.ShowAllGrades();
+                                await _mainMenuGrade.ShowAllGrades();
                                 break;
                             case 4:
-                                _mainMenuTeacher.ShowAllTeachers();
+                                await _mainMenuTeacher.ShowAllTeachers();
                                 break;
                             case 5:
-                                _mainMenuSubject.ShowAllSubjects();
+                                await _mainMenuSubject.ShowAllSubjects();
                                 break;
                             case 6:
                                 goingShowAllMenu = false;
@@ -128,19 +128,19 @@ internal class StudyManagementMenu
                         switch (optionShowOne)
                         {
                             case 1:
-                                _mainMenuStudent.ShowOneStudentById();
+                                await _mainMenuStudent.ShowOneStudentById();
                                 break;
                             case 2:
-                                _mainMenuCourse.ShowOneCourseById();
+                                await _mainMenuCourse.ShowOneCourseById();
                                 break;
                             case 3:
-                                _mainMenuGrade.ShowOneGradeById();
+                                await _mainMenuGrade.ShowOneGradeById();
                                 break;
                             case 4:
-                                _mainMenuTeacher.ShowOneTeacherById();
+                                await _mainMenuTeacher.ShowOneTeacherById();
                                 break;
                             case 5:
-                                _mainMenuSubject.ShowOneSubjectById();
+                                await _mainMenuSubject.ShowOneSubjectById();
                                 break;
                             case 6:
                                 goingShowOneMenu = false;
@@ -169,19 +169,19 @@ internal class StudyManagementMenu
                         switch (optionUpdate)
                         {
                             case 1:
-                                _mainMenuStudent.UpdateStudent();
+                                await _mainMenuStudent.UpdateStudent();
                                 break;
                             case 2:
-                                _mainMenuCourse.UpdateCourse();
+                                await _mainMenuCourse.UpdateCourse();
                                 break;
                             case 3:
-                                _mainMenuGrade.UpdateGrade();
+                                await _mainMenuGrade.UpdateGrade();
                                 break;
                             case 4:
-                                _mainMenuTeacher.UpdateTeacher();
+                                await _mainMenuTeacher.UpdateTeacher();
                                 break;
                             case 5:
-                                _mainMenuSubject.UpdateSubject();
+                                await _mainMenuSubject.UpdateSubject();
                                 break;
                             case 6:
                                 goingUpdateMenu = false;
@@ -210,19 +210,19 @@ internal class StudyManagementMenu
                         switch (optionDelete)
                         {
                             case 1:
-                                _mainMenuStudent.DeleteStudentById();
+                                await _mainMenuStudent.DeleteStudentById();
                                 break;
                             case 2:
-                                _mainMenuCourse.DeleteCourseById();
+                                await _mainMenuCourse.DeleteCourseById();
                                 break;
                             case 3:
-                                _mainMenuGrade.DeleteGradeById();
+                                await _mainMenuGrade.DeleteGradeById();
                                 break;
                             case 4:
-                                _mainMenuTeacher.DeleteTeacherById();
+                                await _mainMenuTeacher.DeleteTeacherById();
                                 break;
                             case 5:
-                                _mainMenuSubject.DeleteSubjectById();
+                                await _mainMenuSubject.DeleteSubjectById();
                                 break;
                             case 6:
                                 goingDeleteMenu = false;

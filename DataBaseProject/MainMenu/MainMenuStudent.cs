@@ -7,8 +7,7 @@ internal class MainMenuStudent
     {
         _studentService = studentService;
     }
-
-    public void AddNewStudent()
+    public async Task AddNewStudent()
     {
         try
         {
@@ -29,7 +28,7 @@ internal class MainMenuStudent
             Console.Write("Grade (F-A): ");
             var grade = Console.ReadLine()!;
 
-            var newStudent = _studentService.CreateStudent(firstName, lastName, email, phoneNumber, courseName, grade);
+            var newStudent = await _studentService.CreateStudent(firstName, lastName, email, phoneNumber, courseName, grade);
             if (newStudent != null)
             {
                 Console.Clear();
@@ -44,14 +43,14 @@ internal class MainMenuStudent
             Console.ReadKey();
         }
     }
-    public void ShowAllStudents()
+    public async Task ShowAllStudents()
     {
         try
         {
             Console.Clear();
             Console.WriteLine("All Students in our System");
 
-            var students = _studentService.GetAllStudents();
+            var students = await _studentService.GetAllStudents();
             foreach (var student in students)
             {
                 Console.WriteLine($"\n{student.FirstName} {student.LastName}, {student.Email} {student.PhoneNumber}");
@@ -65,7 +64,7 @@ internal class MainMenuStudent
             Console.ReadKey();
         }
     }
-    public void ShowOneStudentById()
+    public async Task ShowOneStudentById()
     {
         try
         {
@@ -74,7 +73,7 @@ internal class MainMenuStudent
             Console.Write("Type in the students ID-number: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var student = _studentService.GetStudentById(id);
+            var student = await _studentService.GetStudentById(id);
             if (student != null)
             {
                 Console.WriteLine($"Student with the ID: {id}.");
@@ -89,8 +88,7 @@ internal class MainMenuStudent
             Console.ReadKey();
         }
     }
-
-    public void UpdateStudent()
+    public async Task UpdateStudent()
     {
         try
         {
@@ -99,7 +97,7 @@ internal class MainMenuStudent
             Console.Write("Type Student Id here: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var student = _studentService.GetStudentById(id);
+            var student = await _studentService.GetStudentById(id);
             if (student != null)
             {
                 Console.WriteLine($"{student.FirstName} {student.LastName}, {student.Email} {student.PhoneNumber}");
@@ -113,7 +111,7 @@ internal class MainMenuStudent
                 Console.Write("New Phone Number: ");
                 student.PhoneNumber = Console.ReadLine();
 
-                var updatedStudent = _studentService.UpdateStudent(student);
+                var updatedStudent = await _studentService.UpdateStudent(student);
                 Console.Clear();
                 Console.WriteLine("Student updated!");
                 Console.ReadKey();
@@ -126,7 +124,7 @@ internal class MainMenuStudent
             Console.ReadKey();
         }
     }
-    public void DeleteStudentById()
+    public async Task DeleteStudentById()
     {
         try
         {
@@ -135,11 +133,11 @@ internal class MainMenuStudent
             Console.Write("Students ID-number: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var student = _studentService.GetStudentById(id);
+            var student = await _studentService.GetStudentById(id);
             if (student != null)
             {
                 Console.WriteLine($"You are now deleting {student.FirstName} {student.LastName}.");
-                _studentService.DeleteStudent(id);
+                await _studentService.DeleteStudent(id);
                 Console.WriteLine("Student Deleted!");
                 Console.ReadKey();
             }

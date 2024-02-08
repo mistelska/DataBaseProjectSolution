@@ -11,14 +11,14 @@ internal class SubjectService
         _subjectRepository = subjectRepository;
     }
 
-    public SubjectEntity CreateSubject(string subjectName)
+    public async Task<SubjectEntity> CreateSubject(string subjectName)
     {
         try
         {
-            var subjectEntity = _subjectRepository.Get(x => x.SubjectName == subjectName);
+            var subjectEntity = await _subjectRepository.Get(x => x.SubjectName == subjectName);
             if (subjectEntity == null)
             {
-                subjectEntity = _subjectRepository.Create(new SubjectEntity { SubjectName = subjectName });
+                subjectEntity = await _subjectRepository.Create(new SubjectEntity { SubjectName = subjectName });
             }
             return subjectEntity;
         }
@@ -30,13 +30,12 @@ internal class SubjectService
             return null!;
         }
     }
-
-    public SubjectEntity GetSubjectById(int id)
+    public async Task<SubjectEntity> GetSubjectById(int id)
     {
         try
         {
 
-            var subjectEntity = _subjectRepository.Get(x => x.Id == id);
+            var subjectEntity = await _subjectRepository.Get(x => x.Id == id);
             return subjectEntity;
         }
         catch (Exception ex)
@@ -47,12 +46,11 @@ internal class SubjectService
             return null!;
         }
     }
-
-    public IEnumerable<SubjectEntity> GetAllSubjects()
+    public async Task<IEnumerable<SubjectEntity>> GetAllSubjects()
     {
         try
         {
-            var subjects = _subjectRepository.GetAllFromList();
+            var subjects = await _subjectRepository.GetAllFromList();
             return subjects;
         }
         catch (Exception ex)
@@ -63,12 +61,11 @@ internal class SubjectService
             return null!;
         }
     }
-
-    public SubjectEntity UpdateSubject(SubjectEntity subjectEntity)
+    public async Task<SubjectEntity> UpdateSubject(SubjectEntity subjectEntity)
     {
         try
         {
-            var updatedSubject = _subjectRepository.Update(x => x.Id == subjectEntity.Id, subjectEntity);
+            var updatedSubject = await _subjectRepository.Update(x => x.Id == subjectEntity.Id, subjectEntity);
             return updatedSubject;
         }
         catch (Exception ex)
@@ -79,12 +76,11 @@ internal class SubjectService
             return null!;
         }
     }
-
-    public void DeleteSubject(int id)
+    public async Task DeleteSubject(int id)
     {
         try
         {
-            _subjectRepository.Delete(x => x.Id == id);
+            await _subjectRepository.Delete(x => x.Id == id);
         }
         catch (Exception ex)
         {

@@ -11,14 +11,14 @@ internal class CourseService
     {
         _courseRepository = courseRepository;
     }
-    public CourseEntity CreateCourse(string courseName)
+    public async Task<CourseEntity> CreateCourse(string courseName)
     {
         try
         {
-            var courseEntity = _courseRepository.Get(x => x.CourseName == courseName);
+            var courseEntity = await _courseRepository.Get(x => x.CourseName == courseName);
             if (courseEntity == null)
             {
-                courseEntity = _courseRepository.Create(new CourseEntity { CourseName = courseName });
+                courseEntity = await _courseRepository.Create(new CourseEntity { CourseName = courseName });
             }
             return courseEntity;
         }
@@ -31,11 +31,11 @@ internal class CourseService
         }
     }
 
-    public CourseEntity GetCourseById(int id)
+    public async Task<CourseEntity> GetCourseById(int id)
     {
         try
         {
-            var courseEntity = _courseRepository.Get(x => x.Id == id);
+            var courseEntity = await _courseRepository.Get(x => x.Id == id);
             return courseEntity;
         }
         catch (Exception ex)
@@ -47,11 +47,11 @@ internal class CourseService
         }
     }
 
-    public IEnumerable<CourseEntity> GetAllCourses()
+    public async Task<IEnumerable<CourseEntity>> GetAllCourses()
     {
         try
         {
-            var courses = _courseRepository.GetAllFromList();
+            var courses = await _courseRepository.GetAllFromList();
             return courses;
         }
         catch (Exception ex)
@@ -63,11 +63,11 @@ internal class CourseService
         }
     }
 
-    public CourseEntity UpdateCourse(CourseEntity courseEntity)
+    public async Task<CourseEntity> UpdateCourse(CourseEntity courseEntity)
     {
         try
         {
-            var updatedCours = _courseRepository.Update(x => x.Id == courseEntity.Id, courseEntity);
+            var updatedCours = await _courseRepository.Update(x => x.Id == courseEntity.Id, courseEntity);
             return updatedCours;
         }
         catch (Exception ex)
@@ -79,11 +79,11 @@ internal class CourseService
         }
     }
 
-    public void DeleteCourse(int id)
+    public async Task DeleteCourse(int id)
     {
         try
         {
-            _courseRepository.Delete(x => x.Id == id);
+            await _courseRepository.Delete(x => x.Id == id);
         }
         catch(Exception ex)
         {

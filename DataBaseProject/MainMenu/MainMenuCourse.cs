@@ -9,7 +9,7 @@ internal class MainMenuCourse
     {
         _courseService = courseService;
     }
-    public void AddNewCourse()
+    public async Task AddNewCourse()
     {
         try
         {
@@ -19,7 +19,7 @@ internal class MainMenuCourse
             Console.Write("Course Name: ");
             var courseName = Console.ReadLine()!;
 
-            var newCourse = _courseService.CreateCourse(courseName);
+            var newCourse = await _courseService.CreateCourse(courseName);
             if (newCourse != null)
             {
                 Console.Clear();
@@ -34,14 +34,14 @@ internal class MainMenuCourse
             Console.ReadKey();
         }
     }
-    public void ShowAllCourses()
+    public async Task ShowAllCourses()
     {
         try
         {
             Console.Clear();
             Console.WriteLine("All Courses in our System");
 
-            var courses = _courseService.GetAllCourses();
+            var courses = await _courseService.GetAllCourses();
             foreach (var course in courses)
             {
                 Console.WriteLine($"\n{course.CourseName}");
@@ -55,7 +55,7 @@ internal class MainMenuCourse
             Console.ReadKey();
         }
     }
-    public void ShowOneCourseById()
+    public async Task ShowOneCourseById()
     {
         try
         {
@@ -64,7 +64,7 @@ internal class MainMenuCourse
             Console.Write("Type in the course ID-number: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var course = _courseService.GetCourseById(id);
+            var course = await _courseService.GetCourseById(id);
             if (course != null)
             {
                 Console.WriteLine($"Course with the ID: {id}");
@@ -80,7 +80,7 @@ internal class MainMenuCourse
         }
     }
 
-    public void UpdateCourse()
+    public async Task UpdateCourse()
     {
         try
         {
@@ -89,7 +89,7 @@ internal class MainMenuCourse
             Console.Write("Type Course Id here: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var course = _courseService.GetCourseById(id);
+            var course = await _courseService.GetCourseById(id);
             if (course != null)
             {
                 Console.WriteLine($"{course.CourseName}");
@@ -110,7 +110,7 @@ internal class MainMenuCourse
             Console.ReadKey();
         }
     }
-    public void DeleteCourseById()
+    public async Task DeleteCourseById()
     {
         try
         {
@@ -119,11 +119,11 @@ internal class MainMenuCourse
             Console.Write("Course ID-number: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var course = _courseService.GetCourseById(id);
+            var course = await _courseService.GetCourseById(id);
             if (course != null)
             {
                 Console.WriteLine($"You are now deleting {course.CourseName}.");
-                _courseService.DeleteCourse(id);
+                await _courseService.DeleteCourse(id);
                 Console.WriteLine("Course Deleted!");
                 Console.ReadKey();
             }

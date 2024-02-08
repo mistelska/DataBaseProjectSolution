@@ -16,7 +16,7 @@ internal class StudentService
         _gradeService = gradeService;
     }
 
-    public StudentEntity CreateStudent(string firstName, string lastName, string email, string phoneNumber, string courseName, string grade)
+    public async Task<StudentEntity> CreateStudent(string firstName, string lastName, string email, string phoneNumber, string courseName, string grade)
     {
         try
         {
@@ -32,7 +32,7 @@ internal class StudentService
                 CourseId = courseEntity.Id,
                 GradeId = gradeEntity.Id
             };
-            studentEntity = _studentRepository.Create(studentEntity);
+            studentEntity = await _studentRepository.Create(studentEntity);
             return studentEntity;
         }
         catch (Exception ex)
@@ -43,12 +43,11 @@ internal class StudentService
             return null!;
         }
     }
-
-    public StudentEntity GetStudentById(int id)
+    public async Task<StudentEntity> GetStudentById(int id)
     {
         try
         {
-            var studentEntity = _studentRepository.Get(x => x.Id == id);
+            var studentEntity = await _studentRepository.Get(x => x.Id == id);
             return studentEntity;
         }
         catch (Exception ex)
@@ -59,12 +58,11 @@ internal class StudentService
             return null!;
         }
     }
-
-    public IEnumerable<StudentEntity> GetAllStudents()
+    public async Task<IEnumerable<StudentEntity>> GetAllStudents()
     {
         try
         {
-            var students = _studentRepository.GetAllFromList();
+            var students = await _studentRepository.GetAllFromList();
             return students;
         }
         catch (Exception ex)
@@ -75,12 +73,11 @@ internal class StudentService
             return null!;
         }
     }
-
-    public StudentEntity UpdateStudent (StudentEntity studentEntity)
+    public async Task<StudentEntity> UpdateStudent (StudentEntity studentEntity)
     {
         try
         {
-            var updatedStudent = _studentRepository.Update(x => x.Id == studentEntity.Id, studentEntity);
+            var updatedStudent = await _studentRepository.Update(x => x.Id == studentEntity.Id, studentEntity);
             return updatedStudent;
         }
         catch (Exception ex)
@@ -91,12 +88,11 @@ internal class StudentService
             return null!;
         }
     }
-
-    public void DeleteStudent(int id)
+    public async Task DeleteStudent(int id)
     {
         try
         {
-            _studentRepository.Delete(x => x.Id == id);
+            await _studentRepository.Delete(x => x.Id == id);
         }
         catch (Exception ex)
         {

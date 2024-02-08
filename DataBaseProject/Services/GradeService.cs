@@ -12,14 +12,14 @@ internal class GradeService
         _gradeRepository = gradeRepository;
     }
 
-    public GradeEntity CreateGrade(string grade)
+    public async Task<GradeEntity> CreateGrade(string grade)
     {
         try
         {
-            var gradeEntity = _gradeRepository.Get(x => x.Grade == grade);
+            var gradeEntity = await _gradeRepository.Get(x => x.Grade == grade);
             if (gradeEntity == null)
             {
-                gradeEntity = _gradeRepository.Create(new GradeEntity { Grade = grade });
+                gradeEntity = await _gradeRepository.Create(new GradeEntity { Grade = grade });
             }
             return gradeEntity;
         }
@@ -32,11 +32,11 @@ internal class GradeService
         }
     }
 
-    public GradeEntity GetGradeById (int id)
+    public async Task<GradeEntity> GetGradeById (int id)
     {
         try
         {
-            var gradeEntity = _gradeRepository.Get(x => x.Id == id);
+            var gradeEntity = await _gradeRepository.Get(x => x.Id == id);
             return gradeEntity;
         }
         catch (Exception ex)
@@ -47,11 +47,11 @@ internal class GradeService
             return null!;
         }
     }
-    public IEnumerable<GradeEntity> GetAllGrades()
+    public async Task<IEnumerable<GradeEntity>> GetAllGrades()
     {
         try
         {
-            var grades = _gradeRepository.GetAllFromList();
+            var grades = await _gradeRepository.GetAllFromList();
             return grades;
         }
         catch (Exception ex)
@@ -62,11 +62,11 @@ internal class GradeService
             return null!;
         }
     }
-    public GradeEntity UpdateGrade (GradeEntity gradeEntity)
+    public async Task<GradeEntity> UpdateGrade (GradeEntity gradeEntity)
     {
         try
         {
-            var updatedGrade = _gradeRepository.Update(x => x.Id == gradeEntity.Id, gradeEntity);
+            var updatedGrade = await _gradeRepository.Update(x => x.Id == gradeEntity.Id, gradeEntity);
             return updatedGrade;
         }
         catch (Exception ex)
@@ -77,11 +77,11 @@ internal class GradeService
             return null!;
         }
     }
-    public void DeleteGrade(int id)
+    public async Task DeleteGrade(int id)
     {
         try
         {
-            _gradeRepository.Delete(x => x.Id == id);
+            await _gradeRepository.Delete(x => x.Id == id);
         }
         catch (Exception ex)
         {

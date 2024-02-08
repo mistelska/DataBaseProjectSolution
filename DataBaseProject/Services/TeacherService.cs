@@ -7,25 +7,23 @@ namespace DataBaseProject.Services
     {
         private readonly TeacherRepository _teacherRepository;
         private readonly SubjectService _subjectService;
-
         public TeacherService(TeacherRepository teacherRepository, SubjectService subjectService)
         {
             _teacherRepository = teacherRepository;
             _subjectService = subjectService;
         }
-
-        public TeacherEntity CreateTeacher(string firstName, string lastName, string subjectName)
+        public async Task<TeacherEntity> CreateTeacher(string firstName, string lastName, string subjectName)
         {
             try
             {
-                var subjectEntity = _subjectService.CreateSubject(subjectName);
+                var subjectEntity = await _subjectService.CreateSubject(subjectName);
                 var teacherEntity = new TeacherEntity
                 {
                     FirstName = firstName,
                     LastName = lastName,
                     SubjectId = subjectEntity.Id
                 };
-                teacherEntity = _teacherRepository.Create(teacherEntity);
+                teacherEntity = await _teacherRepository.Create(teacherEntity);
                 return teacherEntity;
             }
             catch (Exception ex)
@@ -36,12 +34,11 @@ namespace DataBaseProject.Services
                 return null!;
             }
         }
-
-        public TeacherEntity GetTeacherById(int id)
+        public async Task<TeacherEntity> GetTeacherById(int id)
         {
             try
             {
-                var teacherEntity = _teacherRepository.Get(x => x.Id == id);
+                var teacherEntity = await _teacherRepository.Get(x => x.Id == id);
                 return teacherEntity;
             }
             catch (Exception ex)
@@ -52,12 +49,11 @@ namespace DataBaseProject.Services
                 return null!;
             }
         }
-
-        public IEnumerable<TeacherEntity> GetAllTeachers()
+        public async Task<IEnumerable<TeacherEntity>> GetAllTeachers()
         {
             try
             {
-                var teacherEntity = _teacherRepository.GetAllFromList();
+                var teacherEntity = await _teacherRepository.GetAllFromList();
                 return teacherEntity;
             }
             catch (Exception ex)
@@ -68,12 +64,11 @@ namespace DataBaseProject.Services
                 return null!;
             }
         }
-
-        public TeacherEntity UpdateTeacher(TeacherEntity teacherEntity)
+        public async Task<TeacherEntity> UpdateTeacher(TeacherEntity teacherEntity)
         {
             try
             {
-                var updatedTeacher = _teacherRepository.Update(x => x.Id == teacherEntity.Id, teacherEntity);
+                var updatedTeacher = await _teacherRepository.Update(x => x.Id == teacherEntity.Id, teacherEntity);
                 return updatedTeacher;
             }
             catch (Exception ex)
@@ -84,12 +79,11 @@ namespace DataBaseProject.Services
                 return null!;
             }
         }
-
-        public void DeleteTeacher(int id)
+        public async Task DeleteTeacher(int id)
         {
             try
             {
-                _teacherRepository.Delete(x => x.Id == id);
+                await _teacherRepository.Delete(x => x.Id == id);
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
 ﻿using DataBaseProject.Contexts;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace DataBaseProject.Repositories;
@@ -11,12 +12,12 @@ internal class Repo<TEntity> where TEntity : class
         _context = context;
     }
 
-    public TEntity Create(TEntity entity)
+    public async Task<TEntity> Create(TEntity entity)
     {
         try
         {
-            _context.Set<TEntity>().Add(entity);
-            _context.SaveChanges();
+            await _context.Set<TEntity>().AddAsync(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
         catch (Exception ex)
@@ -27,11 +28,11 @@ internal class Repo<TEntity> where TEntity : class
             return null!;
         }
     }
-    public IEnumerable<TEntity> GetAllFromList()
+    public async Task<IEnumerable<TEntity>> GetAllFromList()
     {
         try
         {
-            return _context.Set<TEntity>().ToList();
+            return await _context.Set<TEntity>().ToListAsync();
         }
         catch(Exception ex)
         {
@@ -41,11 +42,11 @@ internal class Repo<TEntity> where TEntity : class
             return null!;
         }
     }
-    public TEntity Get(Expression<Func<TEntity, bool>> expression)
+    public async Task<TEntity> Get(Expression<Func<TEntity, bool>> expression)
     {
         try
         {
-            var entity = _context.Set<TEntity>().FirstOrDefault(expression);
+            var entity = await _context.Set<TEntity>().FirstOrDefaultAsync(expression);
             return entity!;
         }
         catch (Exception ex)
@@ -57,13 +58,13 @@ internal class Repo<TEntity> where TEntity : class
         }
     }
 
-    public TEntity Update(Expression<Func<TEntity, bool>> expression,TEntity entity)
+    public async Task<TEntity> Update(Expression<Func<TEntity, bool>> expression,TEntity entity)
     {
         try
         {
-            var entityWillUpdate = _context.Set<TEntity>().FirstOrDefault(expression);
+            var entityWillUpdate = await _context.Set<TEntity>().FirstOrDefaultAsync(expression);
             _context.Entry(entityWillUpdate!).CurrentValues.SetValues(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return entityWillUpdate!;
         }
@@ -76,13 +77,13 @@ internal class Repo<TEntity> where TEntity : class
         }
     }
 
-    public void Delete(Expression<Func<TEntity, bool>> expression)
+    public async Task Delete (Expression<Func<TEntity, bool>> expression)
     {
         try
         {
-            var entity = _context.Set<TEntity>().FirstOrDefault(expression);
+            var entity = await _context.Set<TEntity>().FirstOrDefaultAsync(expression);
             _context.Remove(entity!);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
         catch (Exception ex)
         {

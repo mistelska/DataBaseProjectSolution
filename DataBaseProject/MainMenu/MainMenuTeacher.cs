@@ -10,7 +10,7 @@ internal class MainMenuTeacher
         _teacherService = teacherService;
     }
 
-    public void AddNewTeacher()
+    public async Task AddNewTeacher()
     {
         try
         {
@@ -24,7 +24,7 @@ internal class MainMenuTeacher
             Console.Write("Subject: ");
             var subject = Console.ReadLine()!;
 
-            var newTeacher = _teacherService.CreateTeacher(firstName, lastName, subject);
+            var newTeacher = await _teacherService.CreateTeacher(firstName, lastName, subject);
             if (newTeacher != null)
             {
                 Console.Clear();
@@ -39,14 +39,14 @@ internal class MainMenuTeacher
             Console.ReadKey();
         }
     }
-    public void ShowAllTeachers()
+    public async Task ShowAllTeachers()
     {
       try
       {
             Console.Clear();
             Console.WriteLine("All Teachers in our System");
 
-            var teachers = _teacherService.GetAllTeachers();
+            var teachers = await _teacherService.GetAllTeachers();
             foreach (var teacher in teachers)
             {
                 Console.WriteLine($"\n{teacher.FirstName} {teacher.LastName}");
@@ -60,7 +60,7 @@ internal class MainMenuTeacher
             Console.ReadKey();
       }
     }
-    public void ShowOneTeacherById()
+    public async Task ShowOneTeacherById()
     {
         try
         {
@@ -69,7 +69,7 @@ internal class MainMenuTeacher
             Console.Write("Type in the Teacher ID-number: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var teacher = _teacherService.GetTeacherById(id);
+            var teacher = await _teacherService.GetTeacherById(id);
             if (teacher != null)
             {
                 Console.WriteLine($"Teacher with the ID: {id}");
@@ -85,7 +85,7 @@ internal class MainMenuTeacher
         }
     }
 
-    public void UpdateTeacher()
+    public async Task UpdateTeacher()
     {
         try
         {
@@ -94,7 +94,7 @@ internal class MainMenuTeacher
             Console.Write("Type Teacher Id here: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var teacher = _teacherService.GetTeacherById(id);
+            var teacher = await _teacherService.GetTeacherById(id);
             if (teacher != null)
             {
                 Console.WriteLine($"{teacher.FirstName} {teacher.LastName}");
@@ -104,7 +104,7 @@ internal class MainMenuTeacher
                 Console.Write("New Last Name: ");
                 teacher.LastName = Console.ReadLine()!;
 
-                var updatedTeacher = _teacherService.UpdateTeacher(teacher);
+                var updatedTeacher = await _teacherService.UpdateTeacher(teacher);
                 Console.Clear();
                 Console.WriteLine("Teacher updated!");
                 Console.ReadKey();
@@ -117,7 +117,7 @@ internal class MainMenuTeacher
             Console.ReadKey();
         }
     }
-    public void DeleteTeacherById()
+    public async Task DeleteTeacherById()
     {
         try
         {
@@ -126,11 +126,11 @@ internal class MainMenuTeacher
             Console.Write("Teacher ID-number: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var teacher = _teacherService.GetTeacherById(id);
+            var teacher = await _teacherService.GetTeacherById(id);
             if (teacher != null)
             {
                 Console.WriteLine($"You are now deleting {teacher.FirstName} {teacher.LastName}.");
-                _teacherService.DeleteTeacher(id);
+                await _teacherService.DeleteTeacher(id);
                 Console.WriteLine("Teacher Deleted!");
                 Console.ReadKey();
             }

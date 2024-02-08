@@ -39,7 +39,7 @@ using (var scope = builder.Services.CreateScope())
 
     var studyManagementMenu = serviceProvider.GetRequiredService<StudyManagementMenu>();
 
-    studyManagementMenu.MainMenu();
+    await studyManagementMenu.MainMenu();
 }
 
 

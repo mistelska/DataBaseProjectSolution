@@ -10,7 +10,7 @@ internal class MainMenuGrade
         _gradeService = gradeService;
     }
 
-    public void AddNewGrade()
+    public async Task AddNewGrade()
     {
         try
         {
@@ -20,7 +20,7 @@ internal class MainMenuGrade
             Console.Write("Grade: ");
             var grade = Console.ReadLine()!;
 
-            var newGrade = _gradeService.CreateGrade(grade);
+            var newGrade = await _gradeService.CreateGrade(grade);
             if (newGrade != null)
             {
                 Console.Clear();
@@ -35,14 +35,14 @@ internal class MainMenuGrade
             Console.ReadKey();
         }
     }
-    public void ShowAllGrades()
+    public async Task ShowAllGrades()
     {
         try
         {
             Console.Clear();
             Console.WriteLine("All Grades in our System");
 
-            var grades = _gradeService.GetAllGrades();
+            var grades = await _gradeService.GetAllGrades();
             foreach (var grade in grades)
             {
                 Console.WriteLine($"\n{grade.Grade}");
@@ -56,7 +56,7 @@ internal class MainMenuGrade
             Console.ReadKey();
         }
     }
-    public void ShowOneGradeById()
+    public async Task ShowOneGradeById()
     {
         try
         {
@@ -65,7 +65,7 @@ internal class MainMenuGrade
             Console.Write("Type in the Grade ID-number: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var grade = _gradeService.GetGradeById(id);
+            var grade = await _gradeService.GetGradeById(id);
             if (grade != null)
             {
                 Console.WriteLine($"Grade with the ID: {id}");
@@ -81,7 +81,7 @@ internal class MainMenuGrade
         }
     }
 
-    public void UpdateGrade()
+    public async Task UpdateGrade()
     {
         try
         {
@@ -90,7 +90,7 @@ internal class MainMenuGrade
             Console.Write("Type Grade Id here: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var grade = _gradeService.GetGradeById(id);
+            var grade = await _gradeService.GetGradeById(id);
             if (grade != null)
             {
                 Console.WriteLine($"{grade.Grade}");
@@ -98,7 +98,7 @@ internal class MainMenuGrade
                 Console.Write("New Grade: ");
                 grade.Grade = Console.ReadLine()!;
 
-                var updatedGrade = _gradeService.UpdateGrade(grade);
+                var updatedGrade = await _gradeService.UpdateGrade(grade);
                 Console.Clear();
                 Console.WriteLine("Grade updated!");
                 Console.ReadKey();
@@ -111,7 +111,7 @@ internal class MainMenuGrade
             Console.ReadKey();
         }
     }
-    public void DeleteGradeById()
+    public async Task DeleteGradeById()
     {
         try
         {
@@ -120,11 +120,11 @@ internal class MainMenuGrade
             Console.Write("Grade ID-number: ");
             var id = int.Parse(Console.ReadLine()!);
 
-            var grade = _gradeService.GetGradeById(id);
+            var grade = await _gradeService.GetGradeById(id);
             if (grade != null)
             {
                 Console.WriteLine($"You are now deleting {grade.Grade}.");
-                _gradeService.DeleteGrade(id);
+                await _gradeService.DeleteGrade(id);
                 Console.WriteLine("Grade Deleted!");
                 Console.ReadKey();
             }
