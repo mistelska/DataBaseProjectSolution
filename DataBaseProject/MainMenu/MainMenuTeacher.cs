@@ -72,6 +72,7 @@ internal class MainMenuTeacher
             var teacher = await _teacherService.GetTeacherById(id);
             if (teacher != null)
             {
+                Console.Clear();
                 Console.WriteLine($"Teacher with the ID: {id}");
                 Console.WriteLine($"\n{teacher.FirstName} {teacher.LastName}");
                 Console.ReadKey();
@@ -129,6 +130,7 @@ internal class MainMenuTeacher
             var teacher = await _teacherService.GetTeacherById(id);
             if (teacher != null)
             {
+                Console.Clear();
                 Console.WriteLine($"You are now deleting {teacher.FirstName} {teacher.LastName}.");
                 await _teacherService.DeleteTeacher(id);
                 Console.WriteLine("Teacher Deleted!");

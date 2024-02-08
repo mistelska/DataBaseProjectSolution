@@ -20,8 +20,8 @@ internal class StudentService
     {
         try
         {
-            var courseEntity = _courseService.CreateCourse(courseName);
-            var gradeEntity = _gradeService.CreateGrade(grade);
+            var courseEntity = await _courseService.CreateCourse(courseName);
+            var gradeEntity = await _gradeService.CreateGrade(grade);
 
             var studentEntity = new StudentEntity
             {

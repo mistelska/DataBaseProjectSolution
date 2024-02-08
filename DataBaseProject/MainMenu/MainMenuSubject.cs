@@ -66,6 +66,7 @@ internal class MainMenuSubject
             var subject = await _subjectService.GetSubjectById(id);
             if (subject != null)
             {
+                Console.Clear();
                 Console.WriteLine($"Subject with the ID: {id}");
                 Console.WriteLine($"\n{subject.SubjectName}");
                 Console.ReadKey();
@@ -121,6 +122,7 @@ internal class MainMenuSubject
             var subject = await _subjectService.GetSubjectById(id);
             if (subject != null)
             {
+                Console.Clear();
                 Console.WriteLine($"You are now deleting {subject.SubjectName}.");
                 await _subjectService.DeleteSubject(id);
                 Console.WriteLine("Subject Deleted!");

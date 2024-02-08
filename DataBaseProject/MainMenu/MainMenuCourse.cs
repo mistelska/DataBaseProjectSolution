@@ -67,6 +67,7 @@ internal class MainMenuCourse
             var course = await _courseService.GetCourseById(id);
             if (course != null)
             {
+                Console.Clear();
                 Console.WriteLine($"Course with the ID: {id}");
                 Console.WriteLine($"\n{course.CourseName}");
                 Console.ReadKey();
@@ -122,6 +123,7 @@ internal class MainMenuCourse
             var course = await _courseService.GetCourseById(id);
             if (course != null)
             {
+                Console.Clear();
                 Console.WriteLine($"You are now deleting {course.CourseName}.");
                 await _courseService.DeleteCourse(id);
                 Console.WriteLine("Course Deleted!");

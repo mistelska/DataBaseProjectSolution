@@ -76,6 +76,7 @@ internal class MainMenuStudent
             var student = await _studentService.GetStudentById(id);
             if (student != null)
             {
+                Console.Clear();
                 Console.WriteLine($"Student with the ID: {id}.");
                 Console.WriteLine($"{student.FirstName} {student.LastName}, {student.Email} {student.PhoneNumber}");
                 Console.ReadKey();
@@ -136,6 +137,7 @@ internal class MainMenuStudent
             var student = await _studentService.GetStudentById(id);
             if (student != null)
             {
+                Console.Clear();
                 Console.WriteLine($"You are now deleting {student.FirstName} {student.LastName}.");
                 await _studentService.DeleteStudent(id);
                 Console.WriteLine("Student Deleted!");

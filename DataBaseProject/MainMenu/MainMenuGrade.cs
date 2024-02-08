@@ -68,6 +68,7 @@ internal class MainMenuGrade
             var grade = await _gradeService.GetGradeById(id);
             if (grade != null)
             {
+                Console.Clear();
                 Console.WriteLine($"Grade with the ID: {id}");
                 Console.WriteLine($"\n{grade.Grade}");
                 Console.ReadKey();
@@ -123,6 +124,7 @@ internal class MainMenuGrade
             var grade = await _gradeService.GetGradeById(id);
             if (grade != null)
             {
+                Console.Clear();
                 Console.WriteLine($"You are now deleting {grade.Grade}.");
                 await _gradeService.DeleteGrade(id);
                 Console.WriteLine("Grade Deleted!");
